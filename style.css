@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --White: #fff;
+    --Light-Pink: #f9f0ff;
+    --Grayish-Purple: #8c6991;
+    --Dark-Purple: #2f1533;
+    font-size: 62.5%;
+    font-family: 'Work Sans', sans-serif;
+    font-optical-sizing: auto;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    max-width: 100vw;
+    max-width: 100svw;
+}
+
+body {
+    background-color: var(--Light-Pink);
+    min-height: 100svh;
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+body>div:first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 35svh;
+    --background: url(assets/images/background-pattern-mobile.svg);
+    background: var(--background) no-repeat;
+    background-size: cover;
+    z-index: 1;
+}
+
+body section {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    background-color: var(--White);
+    padding: 2em 2em;
+    width: clamp(20em, 25em + 25vw, 60em);
+    border-radius: 1em;
+    z-index: 2;
+    box-shadow: 0 1.5em 3em 0 #6f517e3d;
+
+    header {
+        display: flex;
+        align-items: center;
+        gap: 1.5em;
+
+        h1 {
+            font-size: clamp(2rem, 2rem + 2vw, 4.5rem);
+            font-weight: 700;
+            color: var(--Dark-Purple);
+        }
+
+        img {
+            width: clamp(1em, 1.5em + 1.5vw, 3em);
+            height: auto;
+        }
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+
+        .accordion {
+            display: flex;
+            flex-direction: column;
+            font-size: 1.6rem !important;
+            overflow: hidden;
+            padding: 2em 0;
+
+
+            &:not(:first-child, :last-child) {
+                border-top: 1px solid var(--Light-Pink);
+                border-bottom: 1px solid var(--Light-Pink);
+            }
+
+            &>div {
+                display: flex;
+                align-items: center;
+                position: relative;
+
+                h2 {
+                    font-weight: normal;
+                    font-size: 1.6rem;
+                    width: 85%;
+                    color: var(--Dark-Purple);
+                    font-weight: 600;
+                }
+
+                input {
+                    position: absolute;
+                    top: 50%;
+                    left: 100%;
+                    transform: translate(-138%, -62%);
+                    width: 1.5em;
+                    height: 1.5em;
+                    background-color: transparent;
+                    border-radius: 50%;
+                    border: none;
+                    scale: .8;
+                    &:checked {
+                        background-color: transparent;
+                    }
+                    &:focus{
+                        outline:  1px solid var(--Dark-Purple);
+                    }
+                }
+
+                label {
+                    cursor: pointer;
+                    position: absolute;
+                    top: 50%;
+                    left: 100%;
+                    transform: translate(-100%, -50%);
+
+                    div {
+                        width: 1.5em;
+                        height: 1.5em;
+                        border-radius: 50%;
+                        background-color: #d610d6;
+
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            width: .1em;
+                            height: .8em;
+                            border-radius: .2em;
+                            background-color: var(--White);
+                            transition: all 200ms ease-out;
+                        }
+
+                        &::before {
+                            content: '';
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            width: .8em;
+                            height: .1em;
+                            border-radius: .2em;
+                            background-color: var(--White);
+                        }
+                    }
+                }
+
+                &:has(input:checked) label div {
+                    background-color: var(--Dark-Purple);
+
+                    &::after {
+                        transform: translate(-50%, -50%) rotate(90deg);
+                        background-color: var(--White);
+                    }
+                }
+            }
+
+            &:has(input:checked) {
+                gap: 1em;
+            }
+
+            &:has(input:checked) p {
+                height: 4em;
+                overflow: visible;
+            }
+
+            p {
+                transition: all 200ms ease-out;
+                height: 0;
+                overflow: hidden;
+                color: var(--Grayish-Purple);
+            }
+        }
+    }
+}
+
+.credits {
+    position: absolute;
+    top: 95%;
+    left: 50%;
+    width: max-content;
+    transform: translate(-50%, -95%);
+    font-size: clamp(.7rem, .8rem + .8vw, 1.5rem);
+    color: var(--Grayish-Purple);
+    text-align: center;
+    margin-top: 2em;
+    z-index: 2;
+
+    a {
+        cursor: pointer;
+        text-decoration: none;
+        color: #14ad4f;
+
+        &:visited {
+            color: #22c1ff;
+        }
+    }
+}
+
+
+.particles-js {
+    display: none;
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    bottom: 0;
+    overflow: hidden;
+}
+
+@media screen and (min-width: 62em) {
+    body>div:first-child {
+        --background: url(assets/images/background-pattern-desktop.svg);
+    }
+
+    body section {
+        padding: 3em 3em;
+
+        header {
+            gap: 2em;
+
+            img {
+                width: 3em;
+            }
+        }
+
+        main {
+            .accordion {
+
+                &:has(input:checked) {
+                    gap: 2em;
+                }
+            }
+        }
+    }
+
+    .particles-js {
+        display: block;
+    }
+
+}
